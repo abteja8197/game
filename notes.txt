@@ -1,0 +1,37 @@
+var layers = [];
+
+var layerOrder = [
+    'background',
+    'texture',
+    'walls',
+    'windows',
+    'glasses',
+    'color',
+    'extaobjects',
+    'person',
+    'gunitems'
+];
+
+var background = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+];
+
+var walls = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [1, 1, 0]
+];
+
+var persons = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 1]
+];
+
+
+moves = {
+    personId: 1,
+    move: 'U'
+}

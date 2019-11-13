@@ -1,0 +1,12 @@
+{
+    "name": "game",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "nodemon index.js localhost 3434"
+    },
+    "dependencies": {
+        "node-static": "^0.7.11",
+        "nodemon": "^1.19.4",
+        "websocket": "^1.0.30"
+    }
+}

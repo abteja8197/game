@@ -5,38 +5,41 @@ var WebSocketServer = require('websocket').server;
 
 var gammers = {};
 var gammersData = {};
-var background = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var background = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
-var walls = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-[0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 1, 1, 1, 0, 1, 1, 1, 0, 0],
-[0, 1, 1, 1, 1, 1, 1, 1, 0, 0]
+var walls = [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 0, 0]
 ];
-var balls = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var balls = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
 function broadCasts(payload) {
@@ -52,23 +55,23 @@ var backgroundWidth = background[0].length - 1;
 
 function checkMove(data, move) {
     let isWall = false;
-    if (!(data.r <= backgroundWidth && data.r > 0 && data.c <= backgroundLength && data.c > 0)) {
-        if (move === 'U') {
+    if (!(data.r > backgroundWidth && data.r < 0 && data.c > backgroundLength && data.c < 0)) {
+        if (move === 'U' && data.r > 0) {
             isWall = !walls[data.r - 1][data.c];
             if (isWall) {
                 gammersData['C' + data.connectionId].r -= 1;
             }
-        } else if (move === 'D') {
+        } else if (move === 'D' && data.r < 9) {
             isWall = !walls[data.r + 1][data.c];
             if (isWall) {
                 gammersData['C' + data.connectionId].r += 1;
             }
-        } else if (move === 'L') {
+        } else if (move === 'L' && data.c > 0) {
             isWall = !walls[data.r][data.c - 1];
             if (isWall) {
                 gammersData['C' + data.connectionId].c -= 1;
             }
-        } else if (move === 'R') {
+        } else if (move === 'R' && data.c < 9) {
             isWall = !walls[data.r][data.c + 1];
             if (isWall) {
                 gammersData['C' + data.connectionId].c += 1;
@@ -90,14 +93,20 @@ function initWS(server) {
         connection.on('message', function (message) {
             if (message.type === 'utf8') {
                 var datafromClient = JSON.parse(message.utf8Data);
-                var { actionData, actionName } = datafromClient;
-                var payload = {}, skipBoradCast = false;
+                var {
+                    actionData,
+                    actionName
+                } = datafromClient;
+                var payload = {},
+                    skipBoradCast = false;
                 console.log("jlgkus", backgroundLength, backgroundWidth);
                 switch (actionName) {
                     case 'SET_MY_POSITION':
                         let r = gammersData['C' + connection.connectionId].r = actionData.r;
                         let c = gammersData['C' + connection.connectionId].c = actionData.c;
-                        balls[r][c] = { id: connection.connectionId };
+                        balls[r][c] = {
+                            id: connection.connectionId
+                        };
                         payload = {
                             actionName: 'NEW_GAMER',
                             actionData: {
@@ -119,10 +128,10 @@ function initWS(server) {
                             skipBoradCast = true;
                         }
                         break;
-                    case 'GET_ME_GUID': 
-                      
+                    case 'GET_ME_GUID':
+
                         break;
-                    case 'SET_MATRIX': 
+                    case 'SET_MATRIX':
                         payload = {
                             actionName: 'SET_MATRIX',
                             actionData: {
@@ -137,8 +146,7 @@ function initWS(server) {
                 if (!skipBoradCast) {
                     broadCasts(payload);
                 }
-            }
-            else if (message.type === 'binary') {
+            } else if (message.type === 'binary') {
                 console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
                 //connection.sendBytes(message.binaryData);
             }
@@ -173,7 +181,10 @@ function initWS(server) {
 }
 
 module.exports = function (options) {
-    var { folder, fePort } = options;
+    var {
+        folder,
+        fePort
+    } = options;
     var requestHandler = function (request, response) {
         var body = [];
         if (request.url.indexOf('api') >= 0) {
@@ -208,7 +219,7 @@ module.exports = function (options) {
                             data: ""
                         }));
                     }
-                    
+
                 } else {
                     var file = new static.Server('./' + folder, {
                         headers: {
@@ -224,7 +235,9 @@ module.exports = function (options) {
                                 if (exists) {
                                     file.serveFile('/index.html', 200, {}, request, response);
                                 } else {
-                                    response.writeHead(200, { 'content-type': 'text/html' });
+                                    response.writeHead(200, {
+                                        'content-type': 'text/html'
+                                    });
                                     response.end(JSON.stringify({
                                         msg: 'Build in prgoresssssss static',
                                         details: buildStatus
@@ -232,7 +245,9 @@ module.exports = function (options) {
                                 }
                             });
                         } else {
-                            response.writeHead(200, { 'content-type': 'text/html' });
+                            response.writeHead(200, {
+                                'content-type': 'text/html'
+                            });
                             response.end('Resource Not Found');
                         }
                     });
